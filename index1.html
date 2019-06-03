@@ -1,0 +1,31 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <?php
+        $servername = 'localhost';
+        $username = 'cwirka';
+        $password = 'lex34mc';
+        $dbname = 'cwirka';
+
+        $conn = mysql_connect($servername, $username, $password, $dbname);
+        if($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $table = $conn->('SELECT c.name, c.domain, p.quantity, p.amount FROM client c JOIN purchases p ON c.clientid = p.clientid ORDER BY p.amount');
+        while($row = mysql_fetch_assoc($table)) {
+            $loopResult = '
+                &lt;div class="clientname"&gt;'.$row['name'].'&lt;/div&gt;
+                &lt;div class="clientname"&gt;'.$row['domain'].'&lt;/div&gt;
+                &lt;div class="clientname"&gt;'.$row['quantity'].'&lt;/div&gt;
+                &lt;div class="clientname"&gt;'.$row['amount'].'&lt;/div&gt;
+                ';
+        }
+        echo $loopResult;
+    ?>
+</body>
+
+</html>
